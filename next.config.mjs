@@ -7,20 +7,15 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
+  reactStrictMode: true,
+  swcMinify: true,
+  experimental: {
+    appDir: true,
   },
   images: {
-    unoptimized: true,
+    domains: ['via.placeholder.com', 'public.flourish.studio'],
   },
-  experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
-  },
+  target: 'serverless',
 }
 
 mergeConfig(nextConfig, userConfig)
