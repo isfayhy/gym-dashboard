@@ -3,8 +3,13 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recha
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"]
 
-interface AgeDistributionChartProps {
-  data: { [key: string]: number }
+interface DataPoint {
+  age: string;
+  value: number;
+}
+
+export interface AgeDistributionChartProps {
+  data: DataPoint[];
 }
 
 const AgeDistributionChart: React.FC<AgeDistributionChartProps> = ({ data }) => {
