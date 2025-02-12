@@ -10,12 +10,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    appDir: true,
+    // Suppression de appDir car il n'est plus nécessaire dans les versions récentes
   },
   images: {
     domains: ['via.placeholder.com', 'public.flourish.studio'],
+    unoptimized: true // Nécessaire pour Netlify
   },
-  target: 'serverless',
+  // Suppression de target car il est déprécié
 }
 
 mergeConfig(nextConfig, userConfig)
