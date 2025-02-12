@@ -59,13 +59,14 @@ const CryptoDashboard: React.FC = () => {
   const renderPageContent = () => {
     if (currentSubPage && currentSubPage.component) {
       const SubPageComponent = currentSubPage.component
-      return <SubPageComponent />
+      return SubPageComponent ? <SubPageComponent /> : null
     }
-
+    
     if (currentPage.component) {
       const PageComponent = currentPage.component
-      return <PageComponent />
+      return PageComponent ? <PageComponent /> : null
     }
+    
 
     // Contenu de la page d'accueil (votre contenu existant)
     return (
