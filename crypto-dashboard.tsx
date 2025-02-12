@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import type { FC } from "react"
 import { useEffect, useState } from "react"
 import { Bell, Menu, Search, ChevronDown } from "lucide-react"
 import StatisticsPage from "./statistics-page"
@@ -9,6 +9,7 @@ import TestSurveyPage from "./test-survey-page"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { TrendingUp, DollarSign, BarChart2, Activity } from "lucide-react"
 import SurveyResultsPage from "./components/SurveyResultsPage"
+import { Page, SubPage } from "./types/types"
 
 // Structure des pages mise à jour
 const pages = [
@@ -26,10 +27,10 @@ const pages = [
   },
 ]
 
-const CryptoDashboard: React.FC = () => {
+const CryptoDashboard: FC = () => {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null)
-  const [currentPage, setCurrentPage] = useState(pages[0])
-  const [currentSubPage, setCurrentSubPage] = useState<any>(null)
+  const [currentPage, setCurrentPage] = useState<Page>(pages[0])
+  const [currentSubPage, setCurrentSubPage] = useState<SubPage | null>(null)
 
   useEffect(() => {
     // Charger le script Flourish
@@ -47,12 +48,12 @@ const CryptoDashboard: React.FC = () => {
     setOpenSubMenu(openSubMenu === pageId ? null : pageId)
   }
 
-  const handlePageClick = (page: any) => {
+  const handlePageClick = (page: Page) => {
     setCurrentPage(page)
     setCurrentSubPage(null)
   }
 
-  const handleSubPageClick = (subPage: any) => {
+  const handleSubPageClick = (subPage: SubPage) => {
     setCurrentSubPage(subPage)
   }
 
