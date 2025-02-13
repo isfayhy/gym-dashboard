@@ -5,6 +5,20 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Add this to handle potential CORS issues with external resources
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

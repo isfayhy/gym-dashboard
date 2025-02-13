@@ -26,10 +26,18 @@ const pages = [
   },
 ]
 
+const safeObjectEntries = (obj: any) => {
+  if (obj && typeof obj === "object") {
+    return Object.entries(obj)
+  }
+  return []
+}
+
 const CryptoDashboard: React.FC = () => {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null)
   const [currentPage, setCurrentPage] = useState(pages[0])
   const [currentSubPage, setCurrentSubPage] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // Charger le script Flourish
@@ -37,6 +45,18 @@ const CryptoDashboard: React.FC = () => {
     script.src = "https://public.flourish.studio/resources/embed.js"
     script.async = true
     document.body.appendChild(script)
+
+    const fetchData = async () => {
+      try {
+        // Your data fetching logic here
+        // setData(result);
+      } catch (err) {
+        console.error("Error fetching data:", err)
+        setError("Failed to load data. Please try again later.")
+      }
+    }
+
+    fetchData()
 
     return () => {
       document.body.removeChild(script)
@@ -180,6 +200,10 @@ const CryptoDashboard: React.FC = () => {
         </div>
       </div>
     )
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>
   }
 
   return (
