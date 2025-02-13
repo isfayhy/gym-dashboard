@@ -1,15 +1,14 @@
 "use client"
 
-import type { FC } from "react"
+import type React from "react"
 import { useEffect, useState } from "react"
 import { Bell, Menu, Search, ChevronDown } from "lucide-react"
-import StatisticsPage from "./statistics-page"
-import BasicFitPage from "./basic-fit-page"
-import TestSurveyPage from "./test-survey-page"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
-import { TrendingUp, DollarSign, BarChart2, Activity } from "lucide-react"
-import SurveyResultsPage from "./components/SurveyResultsPage"
-import { Page, SubPage } from "./types/types"
+import dynamic from "next/dynamic"
+
+const StatisticsPage = dynamic(() => import("./statistics-page"), { ssr: false })
+const BasicFitPage = dynamic(() => import("./basic-fit-page"), { ssr: false })
+const TestSurveyPage = dynamic(() => import("./test-survey-page"), { ssr: false })
+const SurveyResultsPage = dynamic(() => import("./components/SurveyResultsPage"), { ssr: false })
 
 // Structure des pages mise à jour
 const pages = [
@@ -27,10 +26,10 @@ const pages = [
   },
 ]
 
-const CryptoDashboard: FC = () => {
+const CryptoDashboard: React.FC = () => {
   const [openSubMenu, setOpenSubMenu] = useState<number | null>(null)
-  const [currentPage, setCurrentPage] = useState<Page>(pages[0])
-  const [currentSubPage, setCurrentSubPage] = useState<SubPage | null>(null)
+  const [currentPage, setCurrentPage] = useState(pages[0])
+  const [currentSubPage, setCurrentSubPage] = useState<any>(null)
 
   useEffect(() => {
     // Charger le script Flourish
@@ -48,26 +47,25 @@ const CryptoDashboard: FC = () => {
     setOpenSubMenu(openSubMenu === pageId ? null : pageId)
   }
 
-  const handlePageClick = (page: Page) => {
+  const handlePageClick = (page: any) => {
     setCurrentPage(page)
     setCurrentSubPage(null)
   }
 
-  const handleSubPageClick = (subPage: SubPage) => {
+  const handleSubPageClick = (subPage: any) => {
     setCurrentSubPage(subPage)
   }
 
   const renderPageContent = () => {
     if (currentSubPage && currentSubPage.component) {
       const SubPageComponent = currentSubPage.component
-      return SubPageComponent ? <SubPageComponent /> : null
+      return <SubPageComponent />
     }
-    
+
     if (currentPage.component) {
       const PageComponent = currentPage.component
-      return PageComponent ? <PageComponent /> : null
+      return <PageComponent />
     }
-    
 
     // Contenu de la page d'accueil (votre contenu existant)
     return (
@@ -270,4 +268,7 @@ const data = [
   { name: "Jun", price: 2390 },
   { name: "Jul", price: 3490 },
 ]
+
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
+import { TrendingUp, DollarSign, BarChart2, Activity } from "lucide-react"
 

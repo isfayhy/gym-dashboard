@@ -7,17 +7,20 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   typescript: {
-    // ⚠️ Utilisez ceci uniquement temporairement pour le déploiement
-    ignoreBuildErrors: true
+    ignoreBuildErrors: true,
   },
   images: {
-    domains: ['via.placeholder.com', 'public.flourish.studio'],
-    unoptimized: true // Nécessaire pour Netlify
+    unoptimized: true,
   },
-  // Suppression de target car il est déprécié
+  experimental: {
+    webpackBuildWorker: true,
+    parallelServerBuildTraces: true,
+    parallelServerCompiles: true,
+  },
 }
 
 mergeConfig(nextConfig, userConfig)

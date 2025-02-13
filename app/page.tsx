@@ -1,7 +1,7 @@
 "use client"
 
-import CryptoDashboard from "../components/crypto-dashboard"
+import AgeDistributionChart from "../components/AgeDistributionChart"
 
 export default function SyntheticV0PageForDeployment() {
-  return <CryptoDashboard />
+  return <AgeDistributionChart />
 }
