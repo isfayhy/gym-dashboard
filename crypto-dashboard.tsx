@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import { Bell, Menu, Search, ChevronDown } from "lucide-react"
 import dynamic from "next/dynamic"
-
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
 const StatisticsPage = dynamic(() => import("./statistics-page"), { ssr: false })
 const BasicFitPage = dynamic(() => import("./basic-fit-page"), { ssr: false })
 const TestSurveyPage = dynamic(() => import("./test-survey-page"), { ssr: false })
@@ -268,7 +268,5 @@ const data = [
   { name: "Jun", price: 2390 },
   { name: "Jul", price: 3490 },
 ]
-
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
 import { TrendingUp, DollarSign, BarChart2, Activity } from "lucide-react"
 
